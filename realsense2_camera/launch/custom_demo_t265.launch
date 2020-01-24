@@ -1,0 +1,8 @@
+<launch>
+  <include file="$(find realsense2_camera)/launch/rs_t265.launch">
+    <rosparam>
+      /camera/tracking_module/enable_pose_jumping: false
+    </rosparam>
+    <arg name="serial_no" value="908412110966"/>
+  </include>
+</launch>

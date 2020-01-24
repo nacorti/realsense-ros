@@ -1,0 +1,21 @@
+<launch>
+    <include file="$(find realsense2_camera)/launch/custom3_pointcloud.launch"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="t265_position" args="0.0 0.0 0.0 0 0 0 1 t265_link base_link 100"/>
+    <include file="$(find rtabmap_ros)/launch/custom_rtabmap.launch">
+        <arg name="args" value="--delete_db_on_start"/>
+        <arg name="rgb_topic" value="/d435/color/image_raw/compressed"/>
+        <arg name="depth_topic" value="/d435/aligned_depth_to_color/image_raw/compressedDepth"/>
+        <arg name="camera_info_topic" value="/d435/color/camera_info"/>
+        <arg name="depth_camera_info_topic" value="/d435/depth/camera_info"/>
+        <arg name="visual_odometry" value="false"/>
+        <arg name="odom_topic" value="/t265/odom/sample"/>
+        <!--<arg name="odom_frame_id" value="camera_link"/>-->
+        <arg name="odom_sensor_sync" value="true"/>
+        <arg name="rtabmapviz" value="false"/>
+        <arg name="rviz" value="true"/>
+        <arg name="queue_size" value="200"/>
+        <arg name="approx_sync" value="true"/>
+        <arg name="frame_id" value="d435_link"/>
+    </include>
+</launch>

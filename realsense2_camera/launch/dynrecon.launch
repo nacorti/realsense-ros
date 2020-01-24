@@ -1,0 +1,5 @@
+<launch>
+   <node pkg="dynamic_reconfigure" type="dynparam"
+        args="load /d435/rgb_camera $(find realsense2_camera)/launch/expOff2.yaml"
+        name="dynamic_reconfigure_auto" output="screen" />
+</launch>

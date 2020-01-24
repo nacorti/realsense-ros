@@ -1,0 +1,66 @@
+<launch>
+    <arg name="offline"          default="false"/>
+    <group ns="camera1">
+    	<include unless="$(arg offline)" file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="serial_no" value="831612072156"/>
+            <arg name="align_depth" value="true"/>
+            <arg name="infra_width" value="848"/>
+            <arg name="infra_height" value="480"/>
+            <arg name="depth_width" value="848"/>
+            <arg name="depth_height" value="480"/>
+            <arg name="depth_fps" value="30"/>
+            <arg name="color_width" value="848"/>
+            <arg name="color_height" value="480"/>
+            <arg name="color_fps" value="30"/>
+            <arg name="filters" value="temporal"/>
+        </include>
+    </group>
+    <group ns="camera2">
+        <include unless="$(arg offline)" file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="serial_no" value="908412110966"/>
+            <arg name="linear_accel_cov" value="1.0"/>
+            <arg name="unite_imu_method" value="linear_interpolation"/>
+        </include>
+    </group>
+    <include file="$(find rtabmap_ros)/launch/custom_rtabmap.launch">
+        <arg name="args" value="--delete_db_on_start"/>
+        <arg name="rgb_topic" value="/camera1/camera/color/image_raw"/>
+        <arg name="depth_topic" value="/camera1/camera/aligned_depth_to_color/image_raw"/>
+        <arg name="camera_info_topic" value="/camera1/camera/color/camera_info"/>
+        <arg name="depth_camera_info_topic" value="/camera1/camera/depth/camera_info"/>
+        <arg name="visual_odometry" value="false"/>
+        <arg name="odom_topic" value="/camera2/camera/odom/sample"/>
+        <arg name="odom_sensor_sync" value="true"/>
+        <arg name="rtabmapviz" value="false"/>
+        <arg name="rviz" value="true"/>
+        <arg name="queue_size" value="200"/>
+        <arg name="approx_sync" value="true"/>
+        <!--<arg name="frame_id" value="/camera1/camera/ -->
+    </include>
+
+    <!--<include file="$(find robot_localization)/launch/ukf_template.launch"/>
+    <param name="/ukf_se/frequency" value="300"/>
+    <param name="/ukf_se/base_link_frame" value="camera_link"/>
+    <param name="/ukf_se/odom0" value="rtabmap/odom"/>
+    <rosparam param="/ukf_se/odom0_config">[true,true,true,
+                                            true,true,true,
+                                            true,true,true,
+                                            true,true,true,
+                                            true,true,true]
+    </rosparam>
+    <param name="/ukf_se/odom0_relative" value="true"/>
+    <param name="/ukf_se/odom0_pose_rejection_threshold" value="10000000"/>
+    <param name="/ukf_se/odom0_twist_rejection_threshold" value="10000000"/>
+
+    <param name="/ukf_se/imu0" value="/imu/data"/>
+    <rosparam param="/ukf_se/imu0_config">[false, false, false,
+                                           true,  true,  true,
+                                           true,  true,  true,
+                                           true,  true,  true,
+                                           true,  true,  true]
+    </rosparam>
+    <param name="/ukf_se/imu0_differential" value="true"/>
+    <param name="/ukf_se/imu0_relative" value="false"/>
+    <param name="/ukf_se/use_control" value="false"/>-->
+    <!-- <param name="/ukf_se/odom0_config" value="{true,true,true,}"/> -->
+</launch>

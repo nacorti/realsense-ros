@@ -1,0 +1,28 @@
+<launch>
+  <arg name="camera" value="d435"/>
+  <group ns="$(arg camera)">
+    <include file="$(find realsense2_camera)/launch/includes/d435_nodelet.launch.xml">
+        <arg name="serial_no" value="831612072156"/>
+        <arg name="tf_prefix" value="d435"/>
+        <!--<arg name="json_file_path" value="/home/jetson/catkin_ws/src/realsense-ros/realsense2_camera/launch/fixed_exposure_test.json"/>
+        <arg name="json_file_path" value="/home/jetson/catkin_ws/src/realsense-ros/realsense2_camera/launch/empty.json"/>-->
+        <!--<arg name="enable_pointcloud" value="true"/>-->
+        <arg name="align_depth" value="true"/>
+        <!--<arg name="enable_sync" value="true"/>-->
+        <arg name="enable_infra1" value="false"/>
+        <arg name="enable_infra2" value="false"/>
+        <arg name="infra_width" value="848"/>
+        <arg name="infra_height" value="480"/>
+        <arg name="infra_fps" value="30"/>
+        <arg name="depth_width" value="848"/>
+        <arg name="depth_height" value="480"/>
+        <arg name="depth_fps" value="30"/>-->
+        <arg name="color_width" value="848"/>
+        <arg name="color_height" value="480"/>
+        <arg name="color_fps" value="30"/>
+        <arg name="initial_reset" value="true"/>
+        <!--<arg name="filters" value="temporal"/> spatial,temporal,pointcloud"/>-->
+    </include>
+  </group>
+</launch>
+

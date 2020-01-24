@@ -1,0 +1,25 @@
+<launch>
+    <arg name="offline"          default="false"/>
+    <group ns="camera2">
+        <include unless="$(arg offline)" file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="serial_no" value="908412110966"/>
+            <arg name="linear_accel_cov" value="1.0"/>
+            <arg name="unite_imu_method" value="linear_interpolation"/>
+        </include>
+    </group>
+    <group ns="camera1">
+        <include unless="$(arg offline)" file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="serial_no" value="831612072156"/>
+            <arg name="align_depth" value="true"/>
+            <arg name="infra_width" value="848"/>
+            <arg name="infra_height" value="480"/>
+            <arg name="infra_fps" value="30"/>
+            <arg name="depth_width" value="848"/>
+            <arg name="depth_height" value="480"/>
+            <arg name="depth_fps" value="30"/>
+            <arg name="color_width" value="848"/>
+            <arg name="color_height" value="480"/>
+            <arg name="color_fps" value="30"/>
+        </include>
+    </group>
+</launch>

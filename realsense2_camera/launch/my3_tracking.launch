@@ -1,0 +1,8 @@
+<launch>
+    <include file="$(find realsense2_camera)/launch/custom3_pointcloud.launch"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="t265_position" args="0.0 0.0 0.0 0 0 0 1 t265_link base_link 100"/>
+    <node pkg="timed_roslaunch" type="timed_roslaunch.sh"
+        args="15 rtabmap_ros custom_rtabmap.launch"
+        name="timed_roslaunch2" output="screen" />
+</launch>
